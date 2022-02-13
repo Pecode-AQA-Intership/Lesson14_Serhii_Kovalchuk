@@ -1,4 +1,5 @@
-import { URL, USER_DATA, SELECTORS } from "../fixtures/consts.js";
+import * as userTestData from "./userTestData.js";
+import * as selectors from "./selectors.js"
 
 describe("Creating and verifying a new user", () => {
   before(() => {
@@ -6,87 +7,88 @@ describe("Creating and verifying a new user", () => {
   });
 
   it("Click Add", () => {
-    cy.get("#addNewRecordButton").click();
-    cy.get(".modal-content").should("be.visible");
+    cy.get(selectors.ADD_NEW_RECORD_BUTTON).click();
+    cy.get(selectors.MODAL_CONTENT).should("be.visible");
   });
   it("Enter User Data", () => {
-    cy.get(SELECTORS.firstName)
-      .type(USER_DATA.fakeFirstName)
-      .should("have.value", USER_DATA.fakeFirstName)
+    cy.get(selectors.FIRST_NAME)
+      .type(userTestData.FAKE_FIRST_NAME)
+      .should("have.value", userTestData.FAKE_FIRST_NAME)
 
-      .get(SELECTORS.lastName)
-      .type(USER_DATA.fakeLastName)
-      .should("have.value", USER_DATA.fakeLastName)
+      .get(selectors.LAST_NAME)
+      .type(userTestData.FAKE_LAST_NAME)
+      .should("have.value", userTestData.FAKE_LAST_NAME)
 
-      .get(SELECTORS.email)
-      .type(USER_DATA.fakeEmail)
-      .should("have.value", USER_DATA.fakeEmail)
+      .get(selectors.EMAIL)
+      .type(userTestData.FAKE_EMAIL)
+      .should("have.value", userTestData.FAKE_EMAIL)
 
-      .get(SELECTORS.age)
-      .type(USER_DATA.fakeAge)
-      .should("have.value", USER_DATA.fakeAge)
+      .get(selectors.AGE)
+      .type(userTestData.FAKE_AGE)
+      .should("have.value", userTestData.FAKE_AGE)
 
-      .get(SELECTORS.salary)
-      .type(USER_DATA.fakeSalary)
-      .should("have.value", USER_DATA.fakeSalary)
+      .get(selectors.SALARY)
+      .type(userTestData.FAKE_SALARY)
+      .should("have.value", userTestData.FAKE_SALARY)
 
-      .get(SELECTORS.department)
-      .type(USER_DATA.fakeDepartment)
-      .should("have.value", USER_DATA.fakeDepartment)
+      .get(selectors.DEPARTMENT)
+      .type(userTestData.FAKE_DEPARTMENT)
+      .should("have.value", userTestData.FAKE_DEPARTMENT)
 
-      .get(SELECTORS.submitButton)
+      .get(selectors.SUBMIT_BUTTON)
       .click();
   });
   it("Check if the user has been add", () => {
     cy.get(".rt-tr-group")
-      .should("include.text", USER_DATA.fakeFirstName)
-      .should("include.text", USER_DATA.fakeLastName)
-      .should("include.text", USER_DATA.fakeEmail)
-      .should("include.text", USER_DATA.fakeAge)
-      .should("include.text", USER_DATA.fakeSalary)
-      .should("include.text", USER_DATA.fakeDepartment);
+      .should("include.text", 
+        userTestData.FAKE_FIRST_NAME,
+        userTestData.FAKE_LAST_NAME,
+        userTestData.FAKE_EMAIL,
+        userTestData.FAKE_AGE,
+        userTestData.FAKE_SALARY,
+        userTestData.FAKE_DEPARTMENT);
   });
 
   it("Check the searching feature", () => {
-    cy.get("#searchBox")
-      .type(USER_DATA.fakeFirstName)
-      .should("have.value", USER_DATA.fakeFirstName)
-      .get(".rt-tbody")
-      .should("include.text", USER_DATA.fakeFirstName)
+    cy.get(selectors.SEARCH_BOX)
+      .type(userTestData.FAKE_FIRST_NAME)
+      .should("have.value", userTestData.FAKE_FIRST_NAME)
+      .get(selectors.SEARCH_OUTPUT)
+      .should("include.text", userTestData.FAKE_FIRST_NAME)
 
-      .get("#searchBox")
+      .get(selectors.SEARCH_BOX)
       .type("{selectall}{backspace}")
-      .type(USER_DATA.fakeLastName)
-      .should("have.value", USER_DATA.fakeLastName)
-      .get(".rt-tbody")
-      .should("include.text", USER_DATA.fakeLastName)
+      .type(userTestData.fakeLastName)
+      .should("have.value", userTestData.fakeLastName)
+      .get(selectors.SEARCH_OUTPUT)
+      .should("include.text", userTestData.fakeLastName)
 
-      .get("#searchBox")
+      .get(selectors.SEARCH_BOX)
       .type("{selectall}{backspace}")
-      .type(USER_DATA.fakeAge)
-      .should("have.value", USER_DATA.fakeAge)
-      .get(".rt-tbody")
-      .should("include.text", USER_DATA.fakeAge)
+      .type(userTestData.fakeAge)
+      .should("have.value", userTestData.fakeAge)
+      .get(selectors.SEARCH_OUTPUT)
+      .should("include.text", userTestData.fakeAge)
 
-      .get("#searchBox")
+      .get(selectors.SEARCH_BOX)
       .type("{selectall}{backspace}")
-      .type(USER_DATA.fakeEmail)
-      .should("have.value", USER_DATA.fakeEmail)
-      .get(".rt-tbody")
-      .should("include.text", USER_DATA.fakeEmail)
+      .type(userTestData.fakeEmail)
+      .should("have.value", userTestData.fakeEmail)
+      .get(selectors.SEARCH_OUTPUT)
+      .should("include.text", userTestData.fakeEmail)
 
-      .get("#searchBox")
+      .get(selectors.SEARCH_BOX)
       .type("{selectall}{backspace}")
-      .type(USER_DATA.fakeSalary)
-      .should("have.value", USER_DATA.fakeSalary)
-      .get(".rt-tbody")
-      .should("include.text", USER_DATA.fakeSalary)
+      .type(userTestData.fakeSalary)
+      .should("have.value", userTestData.fakeSalary)
+      .get(selectors.SEARCH_OUTPUT)
+      .should("include.text", userTestData.fakeSalary)
 
-      .get("#searchBox")
+      .get(selectors.SEARCH_BOX)
       .type("{selectall}{backspace}")
-      .type(USER_DATA.fakeDepartment)
-      .should("have.value", USER_DATA.fakeDepartment)
-      .get(".rt-tbody")
-      .should("include.text", USER_DATA.fakeDepartment);
+      .type(userTestData.fakeDepartment)
+      .should("have.value", userTestData.fakeDepartment)
+      .get(selectors.SEARCH_OUTPUT)
+      .should("include.text", userTestData.fakeDepartment);
   });
 });
