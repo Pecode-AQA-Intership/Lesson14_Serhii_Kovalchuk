@@ -32,7 +32,7 @@ describe('Testing registration form', () => {
         cy.get('#name').should('have.text',`Name:${RANDOM_NAME}`);
         cy.get('#email').should('have.text',`Email:${RANDOM_EMAIL}`);
         cy.get('#output p#currentAddress').should('include.text', `Current Address :${RANDOM_ADRESS}`);
-        cy.get('#output p#permanentAddress').should('include.text', `Permanent :${RANDOM_ADRESS}`);
+        cy.get('#output #permanentAddress').should('include.text', `Permanent:${RANDOM_ADRESS}`);
 })
          
 })
