@@ -5,14 +5,15 @@ export default class RegistrationPage {
   genderCheckbox = () => cy.get("#gender-radio-2").siblings();
   phoneNumberField = () => cy.get("#userNumber");
   dateOfBirthField = () => cy.get("#dateOfBirthInput");
-  dayInput = () => cy.get(".react-datepicker__day");
+  dayInput = () => cy.get(".react-datepicker__day.react-datepicker__day--026");
   monthInput = () => cy.get(".react-datepicker__month-select");
   yearInput = () => cy.get(".react-datepicker__year-select");
-  subjectsInput = () => cy.get("#subjectsContainer");
+  subjectsInput = () => cy.get(".subjects-auto-complete__input");
   hobbiesCheckbox = () => cy.get("#hobbies-checkbox-3");
   addressField = () => cy.get("#currentAddress");
-  //pictureUpload = () => cy.get("#uploadPicture");
-  //stateSelect = () => cy.get("#state");
-  //citySelect = () => cy.get("#city");
+  pictureUpload = () => cy.get("#uploadPicture");
+  stateSelect = () => cy.get("#state");
+  citySelect = () => cy.get("#city");
   submitButton = () => cy.get("#submit");
+  submitResponse = () => cy.get(".modal-content")
 }
