@@ -3,7 +3,7 @@ import * as selectors from "./selectors.js";
 
 describe("Check if user data is editable", () => {
   before(() => {
-    cy.visit(URL);
+    cy.visit("/webtables");
   });
 
   it("Check if user can get to data edit menu by clicking on edit pictogram", () => {
@@ -23,8 +23,8 @@ describe("Check if user data is editable", () => {
 
       .get(selectors.EMAIL)
       .type("{selectall}{backspace}")
-      .type(userTestData.FAKE_LAST_NAME)
-      .should("have.value", userTestData.FAKE_LAST_NAME)
+      .type(userTestData.FAKE_EMAIL)
+      .should("have.value", userTestData.FAKE_EMAIL)
 
       .get(selectors.AGE)
       .type("{selectall}{backspace}")
@@ -60,7 +60,7 @@ describe("Check if user data is editable", () => {
   it("Delete user data and verify", () => {
     cy.get(selectors.DELETE_BUTTON)
       .click()
-      .get(selectors.SEARCH_OUTPUT)
+      .get(selectors.TABLE)
       .contains(
         userTestData.FAKE_FIRST_NAME,
         userTestData.FAKE_LAST_NAME,
