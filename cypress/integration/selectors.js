@@ -19,4 +19,4 @@ export const SORT_SALARY = ".rt-th:nth-child(5)";
 export const SORT_DEPARTMENT = ".rt-th:nth-child(6)";
 export const SORT_ACTION = ".rt-th:nth-child(7)";  
 export const SEARCH_BOX = "#searchBox";
-export const SEARCH_OUTPUT = ".rt-tbody";
+export const TABLE = ".rt-tbody";

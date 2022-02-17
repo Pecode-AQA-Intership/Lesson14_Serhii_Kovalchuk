@@ -1,9 +1,9 @@
 import * as userTestData from "./userTestData.js";
 import * as selectors from "./selectors.js"
-
+import * as functions from "./functions.js"
 describe("Creating and verifying a new user", () => {
   before(() => {
-    cy.visit(URL);
+    cy.visit("/webtables");
   });
 
   it("Click Add", () => {
@@ -53,42 +53,158 @@ describe("Creating and verifying a new user", () => {
     cy.get(selectors.SEARCH_BOX)
       .type(userTestData.FAKE_FIRST_NAME)
       .should("have.value", userTestData.FAKE_FIRST_NAME)
-      .get(selectors.SEARCH_OUTPUT)
+      .get(selectors.TABLE)
       .should("include.text", userTestData.FAKE_FIRST_NAME)
 
       .get(selectors.SEARCH_BOX)
       .type("{selectall}{backspace}")
-      .type(userTestData.fakeLastName)
-      .should("have.value", userTestData.fakeLastName)
-      .get(selectors.SEARCH_OUTPUT)
-      .should("include.text", userTestData.fakeLastName)
+      .type(userTestData.FAKE_LAST_NAME)
+      .should("have.value", userTestData.FAKE_LAST_NAME)
+      .get(selectors.TABLE)
+      .should("include.text", userTestData.FAKE_LAST_NAME)
 
       .get(selectors.SEARCH_BOX)
       .type("{selectall}{backspace}")
-      .type(userTestData.fakeAge)
-      .should("have.value", userTestData.fakeAge)
-      .get(selectors.SEARCH_OUTPUT)
-      .should("include.text", userTestData.fakeAge)
+      .type(userTestData.FAKE_AGE)
+      .should("have.value", userTestData.FAKE_AGE)
+      .get(selectors.TABLE)
+      .should("include.text", userTestData.FAKE_AGE)
 
       .get(selectors.SEARCH_BOX)
       .type("{selectall}{backspace}")
-      .type(userTestData.fakeEmail)
-      .should("have.value", userTestData.fakeEmail)
-      .get(selectors.SEARCH_OUTPUT)
-      .should("include.text", userTestData.fakeEmail)
+      .type(userTestData.FAKE_EMAIL)
+      .should("have.value", userTestData.FAKE_EMAIL)
+      .get(selectors.TABLE)
+      .should("include.text", userTestData.FAKE_EMAIL)
 
       .get(selectors.SEARCH_BOX)
       .type("{selectall}{backspace}")
-      .type(userTestData.fakeSalary)
-      .should("have.value", userTestData.fakeSalary)
-      .get(selectors.SEARCH_OUTPUT)
-      .should("include.text", userTestData.fakeSalary)
+      .type(userTestData.FAKE_SALARY)
+      .should("have.value", userTestData.FAKE_SALARY)
+      .get(selectors.TABLE)
+      .should("include.text", userTestData.FAKE_SALARY)
 
       .get(selectors.SEARCH_BOX)
       .type("{selectall}{backspace}")
-      .type(userTestData.fakeDepartment)
-      .should("have.value", userTestData.fakeDepartment)
-      .get(selectors.SEARCH_OUTPUT)
-      .should("include.text", userTestData.fakeDepartment);
+      .type(userTestData.FAKE_DEPARTMENT)
+      .should("have.value", userTestData.FAKE_DEPARTMENT)
+      .get(selectors.TABLE)
+      .should("include.text", userTestData.FAKE_DEPARTMENT);
   });
+  it("Check if user can sort by First Name", () => {
+
+    cy.get(selectors.SORT_FIRST_NAME).click()
+        .should("have.class", selectors.SORT_ASC)
+        .then(functions.getInnerText)
+        .then((firstNames) => {
+            let sortFirstNames = functions.stringSort(firstNames);
+            expect(firstNames).to.deep.equal(sortFirstNames);
+        })
+
+    cy.get(selectors.SORT_FIRST_NAME).click()
+        .should("have.class", selectors.SORT_DESC)
+        .then(functions.getInnerText)
+        .then((firstNames) => {
+            let sortFirstNames = functions.stringSort(firstNames);
+            expect(firstNames).to.deep.equal(sortFirstNames);
+        })
+})
+
+it("Check if user can sort by Last Name", () => {
+
+    cy.get(selectors.SORT_LAST_NAME).click()
+        .should("have.class", selectors.SORT_ASC)
+        .then(functions.getInnerText)
+        .then((lastNames) => {
+            let sortLastNames = functions.stringSort(lastNames);
+            expect(lastNames).to.deep.equal(sortLastNames);
+        })
+
+    cy.get(selectors.SORT_LAST_NAME).click()
+        .should("have.class", selectors.SORT_DESC)
+        .then(functions.getInnerText)
+        .then((lastNames) => {
+            let sortLastNames = functions.stringSort(lastNames);
+            expect(lastNames).to.deep.equal(sortLastNames);
+        })
+})
+
+it("Check if user can sort by Age", () => {
+
+    cy.get(selectors.SORT_AGE).click()
+        .should("have.class", selectors.SORT_ASC)
+        .then(functions.getNumbers)
+        .then((ages) => {
+            let sortAges = functions.stringSort(ages);
+            expect(ages).to.deep.equal(sortAges);
+        })
+
+    cy.get(selectors.SORT_AGE).click()
+        .should("have.class", selectors.SORT_DESC)
+        .then(functions.getNumbers)
+        .then((ages) => {
+            let sortAges = functions.stringSort(ages);
+            expect(ages).to.deep.equal(sortAges);
+        })
+})
+
+it("Check if user can sort by Email", () => {
+
+    cy.get(selectors.SORT_EMAIL).click()
+        .should("have.class", selectors.SORT_ASC)
+        .then(functions.getInnerText)
+        .then(functions.getNumbers)
+        .then((emails) => {
+            let sortEmails = functions.stringSort(emails);
+            expect(emails).to.deep.equal(sortEmails);
+        })
+
+    cy.get(selectors.SORT_EMAIL).click()
+        .should("have.class", selectors.SORT_DESC)
+        .then(functions.getInnerText)
+        .then(functions.getNumbers)
+        .then((emails) => {
+            let sortEmails = functions.stringSort(emails);
+            expect(emails).to.deep.equal(sortEmails);
+        })
+})
+
+it("Check if user can sort by Salary", () => {
+
+    cy.get(selectors.SORT_SALARY).click()
+        .should("have.class", selectors.SORT_ASC)
+        .then(functions.getNumbers)
+        .then((salary) => {
+            let sortSalary = functions.stringSort(salary);
+            expect(salary).to.deep.equal(sortSalary);
+        })
+
+    cy.get(selectors.SORT_SALARY).click()
+        .should("have.class", selectors.SORT_DESC)
+        .then(functions.getNumbers)
+        .then((salary) => {
+            let sortSalary = functions.stringSort(salary);
+            expect(salary).to.deep.equal(sortSalary);
+        })
+})
+
+it("Check if user can sort by Department", () => {
+
+    cy.get(selectors.SORT_DEPARTMENT).click()
+        .should("have.class", selectors.SORT_ASC)
+        .then(functions.getInnerText)
+        .then((departments) => {
+            let sortDepartments = functions.stringSort(departments);
+            expect(departments).to.deep.equal(sortDepartments);
+        })
+
+    cy.get(selectors.SORT_DEPARTMENT).click()
+        .should("have.class", selectors.SORT_DESC)
+        .then(functions.getInnerText)
+        .then((departments) => {
+            let sortDepartments = functions.stringSort(departments);
+            expect(departments).to.deep.equal(sortDepartments);
+        })
+})
+
 });
