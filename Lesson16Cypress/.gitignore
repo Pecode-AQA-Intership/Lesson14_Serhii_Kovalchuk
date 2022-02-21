@@ -1,5 +1,3 @@
 node_modules
-cypress/fixtures/
 cypress/downloads/
-cypress/support/
 package-lock.json
