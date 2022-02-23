@@ -1,5 +1,3 @@
-import * as testData from "../fixtures/userTestData.js";
-import RegistrationPage from "../pageObjects/registrationPage.js";
 import { inputStudentData, submitResponseVerify } from "./functions.js"
 describe("Student Registration form test", () => {
   before(() => {

@@ -1,4 +1,4 @@
-import * as testData from "../fixtures/userTestData.js";
+import * as testData from "./userTestData.js";
 import RegistrationPage from "../pageObjects/registrationPage.js";
 const registrationPage = new RegistrationPage();
 export function inputStudentData() {
